@@ -1,0 +1,172 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Traceback</title>
+  <style>
+    .queried{
+      margin-top: 0.5em;
+      background: skyblue;
+    }
+    .caller{
+      margin-top: 0.5em;
+    }
+    .endpoint{
+      border: 1px solid lightgreen;
+      padding: 1px;
+    }
+    .potential{
+      background: lightgray;
+    }
+  </style>
+</head>
+<body>
+<h3><- org.apache.catalina.connector.InputBuffer #* </h3>
+<div class="queried"><- org.apache.catalina.connector.InputBuffer #&lt;clinit&gt; </div>
+<div class="queried"><- org.apache.catalina.connector.InputBuffer #&lt;init&gt; </div>
+<div class="caller" style="margin-left:5em"><- org.apache.catalina.connector.Request #&lt;init&gt; </div>
+<div class="caller" style="margin-left:10em"><- org.apache.catalina.connector.Connector #createRequest </div>
+<div class="caller" style="margin-left:15em"><- org.apache.catalina.connector.CoyoteAdapter #log </div>
+<div class="caller endpoint" style="margin-left:20em"><- org.apache.catalina.connector.CoyoteAdapter #errorDispatch </div>
+<div class="caller endpoint" style="margin-left:20em"><- org.apache.catalina.connector.CoyoteAdapter #checkRecycled </div>
+<div class="caller endpoint" style="margin-left:20em"><- org.apache.catalina.connector.CoyoteAdapter #asyncDispatch </div>
+<div class="caller endpoint" style="margin-left:15em"><- org.apache.catalina.connector.CoyoteAdapter #service </div>
+<div class="queried"><- org.apache.catalina.connector.InputBuffer #&lt;init&gt; </div>
+<div class="caller" style="margin-left:5em"><- org.apache.catalina.connector.InputBuffer #&lt;init&gt; </div>
+<div class="caller" style="margin-left:10em"><- org.apache.catalina.connector.Request #&lt;init&gt; </div>
+<div class="caller" style="margin-left:15em"><- org.apache.catalina.connector.Connector #createRequest </div>
+<div class="caller" style="margin-left:20em"><- org.apache.catalina.connector.CoyoteAdapter #log </div>
+<div class="caller endpoint" style="margin-left:25em"><- org.apache.catalina.connector.CoyoteAdapter #errorDispatch </div>
+<div class="caller endpoint" style="margin-left:25em"><- org.apache.catalina.connector.CoyoteAdapter #checkRecycled </div>
+<div class="caller endpoint" style="margin-left:25em"><- org.apache.catalina.connector.CoyoteAdapter #asyncDispatch </div>
+<div class="caller endpoint" style="margin-left:20em"><- org.apache.catalina.connector.CoyoteAdapter #service </div>
+<div class="queried"><- org.apache.catalina.connector.InputBuffer #setRequest </div>
+<div class="caller" style="margin-left:5em"><- org.apache.catalina.connector.Request #setCoyoteRequest </div>
+<div class="caller" style="margin-left:10em"><- org.apache.catalina.connector.CoyoteAdapter #log </div>
+<div class="caller endpoint" style="margin-left:15em"><- org.apache.catalina.connector.CoyoteAdapter #errorDispatch </div>
+<div class="caller endpoint" style="margin-left:15em"><- org.apache.catalina.connector.CoyoteAdapter #checkRecycled </div>
+<div class="caller endpoint" style="margin-left:15em"><- org.apache.catalina.connector.CoyoteAdapter #asyncDispatch </div>
+<div class="caller endpoint" style="margin-left:10em"><- org.apache.catalina.connector.CoyoteAdapter #service </div>
+<div class="queried"><- org.apache.catalina.connector.InputBuffer #getRequest </div>
+<div class="queried"><- org.apache.catalina.connector.InputBuffer #recycle </div>
+<div class="caller" style="margin-left:5em"><- org.apache.catalina.connector.Request #recycle </div>
+<div class="caller endpoint" style="margin-left:10em"><- org.apache.catalina.connector.CoyoteAdapter #errorDispatch </div>
+<div class="caller" style="margin-left:10em"><- org.apache.catalina.connector.CoyoteAdapter #log </div>
+<div class="caller endpoint" style="margin-left:15em"><- org.apache.catalina.connector.CoyoteAdapter #errorDispatch </div>
+<div class="caller endpoint" style="margin-left:15em"><- org.apache.catalina.connector.CoyoteAdapter #checkRecycled </div>
+<div class="caller endpoint" style="margin-left:15em"><- org.apache.catalina.connector.CoyoteAdapter #asyncDispatch </div>
+<div class="caller endpoint" style="margin-left:10em"><- org.apache.catalina.connector.CoyoteAdapter #service </div>
+<div class="caller endpoint" style="margin-left:10em"><- org.apache.catalina.connector.CoyoteAdapter #asyncDispatch </div>
+<div class="caller" style="margin-left:10em"><- org.apache.catalina.connector.CoyoteAdapter #event </div>
+<div class="caller endpoint" style="margin-left:15em"><- org.apache.catalina.connector.CoyoteAdapter #service </div>
+<div class="caller endpoint" style="margin-left:15em"><- org.apache.catalina.connector.CoyoteAdapter #asyncDispatch </div>
+<div class="queried"><- org.apache.catalina.connector.InputBuffer #clearEncoders </div>
+<div class="caller" style="margin-left:5em"><- org.apache.catalina.connector.Request #clearEncoders </div>
+<div class="caller endpoint" style="margin-left:10em"><- org.apache.catalina.connector.CoyoteAdapter #service </div>
+<div class="caller endpoint" style="margin-left:10em"><- org.apache.catalina.connector.CoyoteAdapter #asyncDispatch </div>
+<div class="queried"><- org.apache.catalina.connector.InputBuffer #close </div>
+<div class="caller" style="margin-left:5em"><- org.apache.catalina.connector.CoyoteInputStream$5 #run </div>
+<div class="caller endpoint" style="margin-left:10em"><- org.apache.catalina.connector.CoyoteInputStream$5 #run </div>
+<div class="caller endpoint" style="margin-left:5em"><- org.apache.catalina.connector.CoyoteInputStream #close </div>
+<div class="caller" style="margin-left:5em"><- org.apache.catalina.connector.OutputBuffer #close </div>
+<div class="caller endpoint" style="margin-left:10em"><- org.apache.catalina.connector.CoyoteWriter #close </div>
+<div class="caller endpoint" style="margin-left:10em"><- org.apache.catalina.connector.CoyoteOutputStream #close </div>
+<div class="caller" style="margin-left:10em"><- org.apache.catalina.connector.Response #finishResponse </div>
+<div class="caller endpoint" style="margin-left:15em"><- org.apache.catalina.connector.CoyoteAdapter #service </div>
+<div class="caller" style="margin-left:15em"><- org.apache.catalina.core.StandardHostValve #status </div>
+<div class="caller endpoint" style="margin-left:20em"><- org.apache.catalina.core.StandardHostValve #event </div>
+<div class="caller endpoint" style="margin-left:20em"><- org.apache.catalina.core.StandardHostValve #invoke </div>
+<div class="caller" style="margin-left:20em"><- org.apache.catalina.core.StandardHostValve #throwable </div>
+<div class="caller endpoint" style="margin-left:25em"><- org.apache.catalina.core.StandardHostValve #event </div>
+<div class="caller endpoint" style="margin-left:25em"><- org.apache.catalina.core.StandardHostValve #invoke </div>
+<div class="caller" style="margin-left:25em"><- org.apache.catalina.core.AsyncContextImpl #setErrorState </div>
+<div class="caller endpoint" style="margin-left:30em"><- org.apache.catalina.connector.CoyoteAdapter #service </div>
+<div class="caller endpoint" style="margin-left:30em"><- org.apache.catalina.connector.CoyoteAdapter #asyncDispatch </div>
+<div class="caller endpoint" style="margin-left:15em"><- org.apache.catalina.connector.CoyoteAdapter #asyncDispatch </div>
+<div class="caller" style="margin-left:15em"><- org.apache.catalina.core.StandardHostValve #throwable </div>
+<div class="caller endpoint" style="margin-left:20em"><- org.apache.catalina.core.StandardHostValve #event </div>
+<div class="caller endpoint" style="margin-left:20em"><- org.apache.catalina.core.StandardHostValve #invoke </div>
+<div class="caller" style="margin-left:20em"><- org.apache.catalina.core.AsyncContextImpl #setErrorState </div>
+<div class="caller endpoint" style="margin-left:25em"><- org.apache.catalina.connector.CoyoteAdapter #service </div>
+<div class="caller endpoint" style="margin-left:25em"><- org.apache.catalina.connector.CoyoteAdapter #asyncDispatch </div>
+<div class="caller" style="margin-left:15em"><- org.apache.catalina.valves.ErrorReportValve #report </div>
+<div class="caller endpoint" style="margin-left:20em"><- org.apache.catalina.valves.ErrorReportValve #invoke </div>
+<div class="caller" style="margin-left:15em"><- org.apache.catalina.connector.CometEventImpl #close </div>
+<div class="caller endpoint" style="margin-left:20em"><- org.apache.catalina.valves.CometConnectionManagerValve #lifecycleEvent </div>
+<div class="caller endpoint" style="margin-left:20em"><- org.apache.catalina.valves.CometConnectionManagerValve #sessionDestroyed </div>
+<div class="caller endpoint" style="margin-left:5em"><- org.apache.catalina.connector.CoyoteReader #close </div>
+<div class="queried"><- org.apache.catalina.connector.InputBuffer #available </div>
+<div class="caller endpoint" style="margin-left:5em"><- org.apache.catalina.connector.CoyoteInputStream #available </div>
+<div class="caller" style="margin-left:5em"><- org.apache.catalina.connector.InputBuffer #ready </div>
+<div class="caller endpoint" style="margin-left:10em"><- org.apache.catalina.connector.CoyoteReader #ready </div>
+<div class="caller" style="margin-left:5em"><- org.apache.catalina.connector.CoyoteInputStream$2 #run </div>
+<div class="caller endpoint" style="margin-left:10em"><- org.apache.catalina.connector.CoyoteInputStream$2 #run </div>
+<div class="caller" style="margin-left:5em"><- org.apache.catalina.connector.Request #getAvailable </div>
+<div class="caller endpoint" style="margin-left:10em"><- org.apache.catalina.connector.CoyoteAdapter #service </div>
+<div class="caller endpoint" style="margin-left:10em"><- org.apache.catalina.connector.CoyoteAdapter #asyncDispatch </div>
+<div class="caller" style="margin-left:10em"><- org.apache.catalina.connector.CoyoteAdapter #event </div>
+<div class="caller endpoint" style="margin-left:15em"><- org.apache.catalina.connector.CoyoteAdapter #service </div>
+<div class="caller endpoint" style="margin-left:15em"><- org.apache.catalina.connector.CoyoteAdapter #asyncDispatch </div>
+<div class="queried"><- org.apache.catalina.connector.InputBuffer #realReadBytes </div>
+<div class="caller" style="margin-left:5em"><- org.apache.catalina.connector.InputBuffer #realReadChars </div>
+<div class="caller" style="margin-left:10em"><- org.apache.catalina.connector.InputBuffer #skip </div>
+<div class="caller" style="margin-left:15em"><- org.apache.catalina.connector.CoyoteReader #skip </div>
+<div class="caller endpoint" style="margin-left:20em"><- org.apache.catalina.connector.CoyoteReader #readLine </div>
+<div class="caller" style="margin-left:5em"><- org.apache.catalina.connector.Request #read </div>
+<div class="caller" style="margin-left:10em"><- org.apache.catalina.connector.CoyoteAdapter #event </div>
+<div class="caller endpoint" style="margin-left:15em"><- org.apache.catalina.connector.CoyoteAdapter #service </div>
+<div class="caller endpoint" style="margin-left:15em"><- org.apache.catalina.connector.CoyoteAdapter #asyncDispatch </div>
+<div class="queried"><- org.apache.catalina.connector.InputBuffer #readByte </div>
+<div class="caller" style="margin-left:5em"><- org.apache.catalina.connector.CoyoteInputStream$1 #run </div>
+<div class="caller endpoint" style="margin-left:10em"><- org.apache.catalina.connector.CoyoteInputStream$1 #run </div>
+<div class="caller endpoint" style="margin-left:5em"><- org.apache.catalina.connector.CoyoteInputStream #read </div>
+<div class="queried"><- org.apache.catalina.connector.InputBuffer #read </div>
+<div class="caller" style="margin-left:5em"><- org.apache.catalina.connector.CoyoteInputStream$4 #run </div>
+<div class="caller endpoint" style="margin-left:10em"><- org.apache.catalina.connector.CoyoteInputStream$4 #run </div>
+<div class="caller" style="margin-left:5em"><- org.apache.catalina.connector.CoyoteInputStream$3 #run </div>
+<div class="caller endpoint" style="margin-left:10em"><- org.apache.catalina.connector.CoyoteInputStream$3 #run </div>
+<div class="caller endpoint" style="margin-left:5em"><- org.apache.catalina.connector.CoyoteInputStream #read </div>
+<div class="caller endpoint" style="margin-left:5em"><- org.apache.catalina.connector.CoyoteInputStream #read </div>
+<div class="queried"><- org.apache.catalina.connector.InputBuffer #realWriteChars </div>
+<div class="queried"><- org.apache.catalina.connector.InputBuffer #setEncoding </div>
+<div class="queried"><- org.apache.catalina.connector.InputBuffer #realReadChars </div>
+<div class="caller" style="margin-left:5em"><- org.apache.catalina.connector.InputBuffer #skip </div>
+<div class="caller" style="margin-left:10em"><- org.apache.catalina.connector.CoyoteReader #skip </div>
+<div class="caller endpoint" style="margin-left:15em"><- org.apache.catalina.connector.CoyoteReader #readLine </div>
+<div class="queried"><- org.apache.catalina.connector.InputBuffer #read </div>
+<div class="caller" style="margin-left:5em"><- org.apache.catalina.connector.CoyoteReader #read </div>
+<div class="caller endpoint" style="margin-left:10em"><- org.apache.catalina.connector.CoyoteReader #readLine </div>
+<div class="queried"><- org.apache.catalina.connector.InputBuffer #read </div>
+<div class="queried"><- org.apache.catalina.connector.InputBuffer #read </div>
+<div class="caller endpoint" style="margin-left:5em"><- org.apache.catalina.connector.InputBuffer #read </div>
+<div class="caller endpoint" style="margin-left:5em"><- org.apache.catalina.connector.CoyoteReader #read </div>
+<div class="caller" style="margin-left:5em"><- org.apache.catalina.connector.CoyoteReader #read </div>
+<div class="caller endpoint" style="margin-left:10em"><- org.apache.catalina.connector.CoyoteReader #readLine </div>
+<div class="queried"><- org.apache.catalina.connector.InputBuffer #skip </div>
+<div class="caller" style="margin-left:5em"><- org.apache.catalina.connector.CoyoteReader #skip </div>
+<div class="caller endpoint" style="margin-left:10em"><- org.apache.catalina.connector.CoyoteReader #readLine </div>
+<div class="queried"><- org.apache.catalina.connector.InputBuffer #ready </div>
+<div class="caller endpoint" style="margin-left:5em"><- org.apache.catalina.connector.CoyoteReader #ready </div>
+<div class="queried"><- org.apache.catalina.connector.InputBuffer #markSupported </div>
+<div class="queried"><- org.apache.catalina.connector.InputBuffer #mark </div>
+<div class="caller" style="margin-left:5em"><- org.apache.catalina.connector.CoyoteReader #mark </div>
+<div class="caller endpoint" style="margin-left:10em"><- org.apache.catalina.connector.CoyoteReader #readLine </div>
+<div class="queried"><- org.apache.catalina.connector.InputBuffer #reset </div>
+<div class="caller" style="margin-left:5em"><- org.apache.catalina.connector.CoyoteReader #reset </div>
+<div class="caller endpoint" style="margin-left:10em"><- org.apache.catalina.connector.CoyoteReader #readLine </div>
+<div class="queried"><- org.apache.catalina.connector.InputBuffer #checkConverter </div>
+<div class="caller" style="margin-left:5em"><- org.apache.catalina.connector.Request #getReader </div>
+<div class="caller endpoint" style="margin-left:10em"><- org.apache.catalina.connector.RequestFacade #getReader </div>
+<div class="queried"><- org.apache.catalina.connector.InputBuffer #setConverter </div>
+<div class="caller" style="margin-left:5em"><- org.apache.catalina.connector.InputBuffer #realReadChars </div>
+<div class="caller" style="margin-left:10em"><- org.apache.catalina.connector.InputBuffer #skip </div>
+<div class="caller" style="margin-left:15em"><- org.apache.catalina.connector.CoyoteReader #skip </div>
+<div class="caller endpoint" style="margin-left:20em"><- org.apache.catalina.connector.CoyoteReader #readLine </div>
+<div class="caller" style="margin-left:5em"><- org.apache.catalina.connector.InputBuffer #checkConverter </div>
+<div class="caller" style="margin-left:10em"><- org.apache.catalina.connector.Request #getReader </div>
+<div class="caller endpoint" style="margin-left:15em"><- org.apache.catalina.connector.RequestFacade #getReader </div>
+<div class="queried"><- org.apache.catalina.connector.InputBuffer #access$0 </div>
+<div class="caller" style="margin-left:5em"><- org.apache.catalina.connector.InputBuffer$1 #run </div>
+<div class="caller endpoint" style="margin-left:10em"><- org.apache.catalina.connector.InputBuffer$1 #run </div>
+
+</body>
+</html>

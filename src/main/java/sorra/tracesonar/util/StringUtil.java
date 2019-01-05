@@ -1,5 +1,8 @@
 package sorra.tracesonar.util;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public abstract class StringUtil {
   public static String substringBefore(final String str, final String separator) {
     if (str == null || str.isEmpty()) {
@@ -51,5 +54,14 @@ public abstract class StringUtil {
     }
 
     return changed ? str.substring(beginIdx, endIdx) : str;
+  }
+  public static String replaceBlank(String str) {
+    String dest = "";
+    if (str != null) {
+      Pattern p = Pattern.compile("\\s*|\t|\r|\n");
+      Matcher m = p.matcher(str);
+      dest = m.replaceAll("");
+    }
+    return dest;
   }
 }

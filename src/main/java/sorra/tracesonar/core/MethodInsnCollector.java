@@ -17,6 +17,7 @@ import static org.objectweb.asm.Opcodes.ASM5;
 public class MethodInsnCollector {
   private Collection<String> ignores;
 
+
   private String className;
   private Set<String> calledClasses = new HashSet<>();
 
@@ -63,8 +64,9 @@ public class MethodInsnCollector {
     public MethodVisitor visitMethod(int access, String name, String desc, String signature, String[] exceptions) {
       Method caller = new Method(className, name, desc);
 
-      if ((access & Opcodes.ACC_PRIVATE) == 0 // Non-private
-          && !isIgnore(className, name, desc)) {
+      if (//(access & Opcodes.ACC_PRIVATE) == 0 // Non-private &&!isIgnore(className, name, desc)
+       isIgnore(className, name, desc)) {
+        //sourcePackage
         classOutline.addMethod(caller);
       }
 
@@ -74,7 +76,7 @@ public class MethodInsnCollector {
 //          if (Strings.substringBefore(owner, "$").equals(topClassName)) { // Ignore self class calls
 //            return;
 //          }
-          if (isIgnore(owner, name, desc)) return;
+//          if (isIgnore(owner, name, desc)) return;
 
           GreatMap.INSTANCE.getCallerCollector(new Method(owner, name, desc)).regCaller(caller);
           calledClasses.add(owner);
@@ -86,9 +88,9 @@ public class MethodInsnCollector {
           if (handle == null) {
             return;
           }
-          if (isIgnore(handle.getOwner(), handle.getName(), handle.getDesc())) {
-            return;
-          }
+//          if (isIgnore(handle.getOwner(), handle.getName(), handle.getDesc())) {
+//            return;
+//          }
 
           GreatMap.INSTANCE.getCallerCollector(new Method(handle.getOwner(), handle.getName(), handle.getDesc()))
               .regCaller(caller);
@@ -111,12 +113,15 @@ public class MethodInsnCollector {
 //        return true;
 //      }
 //    }
-    for (Pair<String, String> meth : IGNORE_METHODS) { // Ignore Object methods
-      if (meth._1.equals(name) && meth._2.equals(desc)) {
-        return true;
-      }
+//    for (Pair<String, String> meth : IGNORE_METHODS) { // Ignore Object methods
+//      if (meth._1.equals(name) && meth._2.equals(desc)) {
+//        return true;
+//      }
+//    }
+    //定义源代码里面的包、方法
+    for(String pkg: SOURCE_PACKAGE){
+      if(owner.startsWith(pkg)) return true;
     }
-
     return ignores.stream().anyMatch(
         x -> owner.startsWith(x) && (owner.length() == x.length() || owner.charAt(x.length()) == '/')
     );
@@ -133,5 +138,29 @@ public class MethodInsnCollector {
     IGNORE_METHODS.add(Pair.of("equals", "(Ljava/lang/Object;)Z"));
     IGNORE_METHODS.add(Pair.of("hashCode", "I"));
     IGNORE_METHODS.add(Pair.of("toString", "Ljava/lang/String;"));
+  }
+
+  private static final Set<String> SOURCE_PACKAGE = new HashSet<>();
+  static {
+    SOURCE_PACKAGE.add("");
+    SOURCE_PACKAGE.add("async/");
+    SOURCE_PACKAGE.add("cal/");
+    SOURCE_PACKAGE.add("chat/");
+    SOURCE_PACKAGE.add("checkbox/");
+    SOURCE_PACKAGE.add("colors/");
+    SOURCE_PACKAGE.add("compressionFilters/");
+    SOURCE_PACKAGE.add("dates/");
+    SOURCE_PACKAGE.add("error/");
+    SOURCE_PACKAGE.add("examples/");
+    SOURCE_PACKAGE.add("filters/");
+    SOURCE_PACKAGE.add("javax/");
+    SOURCE_PACKAGE.add("jsp2/");
+    SOURCE_PACKAGE.add("listeners/");
+    SOURCE_PACKAGE.add("num/");
+    SOURCE_PACKAGE.add("org/");
+    SOURCE_PACKAGE.add("sessions/");
+    SOURCE_PACKAGE.add("util/");
+    SOURCE_PACKAGE.add("validators/");
+    SOURCE_PACKAGE.add("websocket/");
   }
 }

@@ -1,13 +1,22 @@
 package sorra.tracesonar.core;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
+import java.io.*;
+
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+
+import org.apache.commons.io.FileUtils;
+import org.eclipse.jdt.core.JavaCore;
+import org.eclipse.jdt.core.dom.AST;
+import org.eclipse.jdt.core.dom.ASTParser;
+import org.eclipse.jdt.core.dom.CompilationUnit;
 import sorra.tracesonar.model.Method;
+import sorra.tracesonar.util.FileHandlers;
+import sorra.tracesonar.util.Filterbyjava;
+import sorra.tracesonar.visitor.MethodDeclarationVisitor;
+
 
 //TODO the tree building is not functional style, thus very hard to understand
 public class Traceback {
@@ -20,36 +29,86 @@ public class Traceback {
   public Traceback(boolean isHtml, boolean includePotentialCalls) {
     this.isHtml = isHtml;
     this.includePotentialCalls = includePotentialCalls;
-
     if (isHtml) {
       printer = node -> {
         if (node.depth == 0) {
           output.append(String.format(
-              "<div class=\"queried\">%s</div>\n", node.self));
+                  "<div class=\"queried\">%s</div>\n", node.self));
         } else {
           String cssClass = "caller";
           if (node.callers.isEmpty()) cssClass += " endpoint";
           if (node.isCallingSuper) cssClass += " potential";
 
           output.append(String.format(
-              "<div class=\"%s\" style=\"margin-left:%dem\">%s</div>\n", cssClass, node.depth * 5, node.self));
+                  "<div class=\"%s\" style=\"margin-left:%dem\">%s</div>\n", cssClass, node.depth * 5, node.self));
         }
+
       };
     } else {
       printer = node -> {
-        char[] indents = new char[node.depth];
-        Arrays.fill(indents, '\t');
-        output.append(String.valueOf(indents)).append(node.self).append('\n');
+        if(node.depth!=0){
+//          String[] fileName = node.self.owner.split("/");
+//          parse(fileName[fileName.length-1],node.self.methodName,node.self);
+          String str ="";
+          str += ("\"" + node.parent.self.toString() +"\" -> \"" + node.self.toString() +"\"\n");
+          System.out.println(str);
+          if(!output.toString().contains(str)){
+            output.append(str);
+          }
+        }
+
+//        char[] indents = new char[node.depth];
+//        Arrays.fill(indents, '\t');
+
       };
     }
+  }
+  private static void parse(String fileName,String methodName,Method method) {
+    String[] classpath = {"C:\\Users\\MIC\\Documents\\experiment project\\tomcat\\tomcatsrc\\lib"};
+    String [] sources={"C:\\Users\\MIC\\Documents\\experiment project\\tomcat\\tomcatsrc\\java"};
+    File dir=new File("C:\\Users\\MIC\\Documents\\experiment project\\tomcat\\tomcatsrc\\java");
+    String str = null;
+    List<File> fileList=new ArrayList<File>();
+    FileFilter fileFilter=new Filterbyjava(fileName);
+    FileHandlers.getFileList(dir,fileList,fileFilter);
+    if(fileList.size()!=0){
+      File file = fileList.get(0);
+      try {
+        str = FileUtils.readFileToString(file);
+        ASTParser parser = ASTParser.newParser(AST.JLS8);
+        parser.setResolveBindings(true);
+        parser.setKind(ASTParser.K_COMPILATION_UNIT);
+
+        parser.setBindingsRecovery(true);
+        Map options = JavaCore.getOptions();
+        options.put(JavaCore.COMPILER_COMPLIANCE, JavaCore.VERSION_1_8);
+        options.put(JavaCore.COMPILER_CODEGEN_TARGET_PLATFORM, JavaCore.VERSION_1_8);
+        options.put(JavaCore.COMPILER_SOURCE, JavaCore.VERSION_1_8);
+        parser.setProject(null);
+
+        parser.setCompilerOptions(options);
+
+        parser.setEnvironment(classpath, sources, new String[] { "UTF-8"}, true);
+        parser.setSource(str.toCharArray());
+        parser.setUnitName(methodName);
+
+        CompilationUnit cu = (CompilationUnit) parser.createAST(null);
+        MethodDeclarationVisitor v = new MethodDeclarationVisitor(method);
+        cu.accept(v);
+
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+    }
+
   }
 
   public CharSequence run(Method self) {
     if (isHtml) output.append("<h3>").append(self).append("</h3>\n");
-    else output.append(self).append("\n");
-
+//    else {
+////      output.append(self).append("\n");
+//    }
     search(self);
-
     return output;
   }
 
@@ -73,8 +132,9 @@ public class Traceback {
 
     //Separate two stages to help debug
     nodeStream
-        .collect(Collectors.toList())
-        .forEach(this::printTree);
+        .collect(Collectors.toList())//collect the output and convert to list
+        .forEach(this::printTree);// output the printTree
+//.forEach(System.out::println);
   }
 
   private static ClassMap.ClassOutline getClassOutline(Method self) {
@@ -125,8 +185,17 @@ public class Traceback {
   }
 
   private void printTree(TreeNode node) {
-    printer.print(node);
-    node.callers.forEach(this::printTree);
+//    if(!node.self.getHasParser()){
+//      String[] fileName = node.self.owner.split("/");
+//      parse(fileName[fileName.length-1],node.self.methodName,node.self);
+//    }
+
+//    if(node.self.getInfo()!=null&&node.self.getInfo().size()>0){
+//      System.out.println(node);
+      printer.print(node);
+      node.callers.forEach(this::printTree);
+//    }
+
   }
 
   private static class TreeNode {
