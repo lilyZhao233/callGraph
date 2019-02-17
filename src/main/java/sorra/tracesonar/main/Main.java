@@ -59,14 +59,6 @@ public class Main {
 
     String str1 = "digraph \"DirectedGraph\" {\n";
     str1 += ("graph [label = \"" + "test" + "\", labelloc=t, concentrate = true];\n");
-//    添加端点信息
-//    String[] info = allsb.toString().split("\n");
-//    for(int i=0;i<info.length;i++){
-//      String[] strings = info[i].split(" -> ");
-////      System.out.println(strings[1]);
-//      set.add(strings[0]+"\n");
-//      set.add(strings[1]+"\n");
-//    }
 
     for(String s : set){
       str1 += s+"\n";
